@@ -1,7 +1,7 @@
 import ClienteModel from "../models/model.cliente.js";
 
 
-class ClientesController {
+class ClienteController {
 
     static getAllCLientes(req, res) {
         try {
