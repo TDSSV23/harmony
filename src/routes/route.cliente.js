@@ -1,11 +1,12 @@
 import { Router } from "express";
-import clientesCliente from "../controllers/controller.cliente.js";
+import ClienteController from "../controllers/controller.cliente.js";
 
 const routeCliente = Router();
 
-routeCliente.get("/clientes", ClienteController.getAllCliente);
-routeClientes.post("/clientes", ClientesController.createClientes);
-routeClientes.put("/clientes/:id", ClientesController.editClientes);
-routeClientes.delete("/clientes/:id", ClientesController.removeClientes);
 
-export default routeclientes;
+routeCliente.get("/clientes", ClienteController.getAllClientes);
+routeCliente.post("/clientes", ClienteController.createCliente);
+routeCliente.put("/clientes/:id", ClienteController.editCliente);
+routeCliente.delete("/clientes/:id", ClienteController.removeCliente);
+
+export default routeCliente;

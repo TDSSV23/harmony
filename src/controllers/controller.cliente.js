@@ -3,9 +3,9 @@ import ClienteModel from "../models/model.cliente.js";
 
 class ClienteController {
 
-    static getAllCLientes(req, res) {
+    static getAllClientes(req, res) {
         try {
-            ClienteModel.getAllUsuarios(function(err, result){
+            ClienteModel.getAllClientes(function(err, result){
                 if (err) {
                     console.error(err);
                     return res.status(500).json( { error: "Ocorreu um erro ao buscar os Clientes." } );
@@ -30,7 +30,7 @@ class ClienteController {
         const senha = p.senha;
 
         try {
-            UsuarioModel.createCliente(nome, email, senha, function(err, result){
+            ClienteModel.createCliente(nome, email, senha, function(err, result){
                 if(err) {
                     console.error("Erro ao cadastrar o cliente: ", err);
                     return res.status(500).json( { error: "Ocorreu um erro ao cadastrar o cliente." } );

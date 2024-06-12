@@ -16,7 +16,7 @@ class ClienteModel {
     }
 
     // Método para criar um novo usuário
-    static createCLiente(nome, email, senha, callback) {
+    static createCliente(nome, email, senha, callback) {
         // Criptografar senha
         const hash = bcrypt.hashSync(senha, 10);
         senha = hash;
