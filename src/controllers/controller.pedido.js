@@ -25,9 +25,18 @@ class PedidoController {
     
     static createPedido(req, res) {
         const p = req.body;
+        const id_cliente = p.id_cliente;
+        const nome = p.nome;
+        const logradouro = p.end_logradouro;
+        const numero = p.end_numero;
+        const bairro = p.end_bairro;
+        const cidade = p.end_cidade;
+        const uf = p.end_uf;
+        const cep = p.end_cep;
+
 
         try {
-            PedidoModel.createPedido(p, function(err, result){
+            PedidoModel.createPedido(p, id_cliente, nome, end_logradouro, end_numero, end_bairro, end_cidade, end_uf, end_cep, function(err, result){
                 if(err) {
                     console.error("Erro ao adicionar o pedido: ", err);
                     return res.status(500).json( { error: "Ocorreu um erro ao adicionar o pedido." } );
@@ -71,6 +80,29 @@ class PedidoController {
 
         } catch (error) {
         res.status(500).json( { error: "Erro interno no servidor." } );
+        }
+    }
+
+    static removePedido(req, res) {
+        let id = req.params.id;
+        
+        try {
+            PedidoModel.removePedido(id, function(err, result){
+                if (err) {
+                    console.error("Erro ao deletar o pedido: ", err);
+                    return res.status(500).json( { error: "Ocorreu um erro ao deletar o pedido." } );
+                }
+
+                if (result.affectedRows === 0) {
+                    return res.status(404).json( { mensage: "Pedido não encontrado." } )
+                }
+
+                return res.status(200).json( { mensage: "Pedido deletado com sucesso.",
+                                               data: { id } } );
+            });
+        } catch (error) {
+            console.error(error);
+        res.status(500).json( { error: "Erro interno no servidor" } );
         }
     }
 

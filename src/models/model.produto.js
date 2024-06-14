@@ -1,11 +1,10 @@
 import { con } from "../config/database.js";
-import bcrypt from 'bcrypt';
 
-class ClienteModel {
+class ProdutoModel {
 
     // Método para obter todos os usuarios
-    static getAllClientes(callback) {
-        let sql = `select * from cliente`;
+    static getAllProdutos(callback) {
+        let sql = `select * from produto`;
     
         con.query(sql, function (err, result){
             if (err)
@@ -16,14 +15,11 @@ class ClienteModel {
     }
 
     // Método para criar um novo usuário
-    static createCliente(nome, telefone, email, senha, callback) {
-        // Criptografar senha
-        const hash = bcrypt.hashSync(senha, 10);
-        senha = hash;
+    static createProduto(nome, descricao, preco, callback) {
 
-        let sql = `insert into cliente (nome, telefone, email, senha) values (?, ?, ?, ?)`;
+        let sql = `insert into produto (nome, descricao, preco) values (?, ?, ?)`;
         
-        con.query(sql, [nome, telefone, email, senha], function(err, result){
+        con.query(sql, [nome, descricao, preco], function(err, result){
             if (err)
                 callback(err, null);
             else
@@ -32,10 +28,10 @@ class ClienteModel {
     }
 
     // Método para editar um usuário existente
-    static editCliente(id, nome, telefone, email, callback) {
-        let sql = `update cliente set nome=?, telefone=?, email=? where id_cliente=?`;
+    static editProduto(id, nome, descricao, preco, callback) {
+        let sql = `update produto set nome=?, descricao=?, preco=? where id_produto=?`;
 
-        con.query(sql, [ nome, telefone, email, id ], function(err, result) {
+        con.query(sql, [ nome, descricao, preco, id ], function(err, result) {
             if (err) 
                 callback (err, null);
             else
@@ -44,8 +40,8 @@ class ClienteModel {
     }
 
     // Método para remover um usuário
-    static removeCliente(id, callback) {
-        let sql = `delete from cliente where id_cliente=?`;
+    static removeProduto(id, callback) {
+        let sql = `delete from produto where id_produto=?`;
 
         con.query(sql, [id], function(err, result){
             if (err)
@@ -57,4 +53,4 @@ class ClienteModel {
 
 }
 
-export default ClienteModel;
+export default ProdutoModel;

@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import routeCliente from "./routes/route.cliente.js";
 import routePedido from "./routes/route.pedido.js";
+import routeProduto from "./routes/route.produto.js";
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(cors());
 // Rotas
 app.use(routeCliente);
 app.use(routePedido);
+app.use(routeProduto);
 
 // Levanta o Servidor
 app.listen(process.env.PORT, function(){

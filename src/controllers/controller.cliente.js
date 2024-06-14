@@ -26,11 +26,12 @@ class ClienteController {
     static createCliente(req, res) {
         const p = req.body;
         const nome = p.nome;
+        const telefone = p.telefone;
         const email = p.email;
         const senha = p.senha;
 
         try {
-            ClienteModel.createCliente(nome, email, senha, function(err, result){
+            ClienteModel.createCliente(nome, telefone, email, senha, function(err, result){
                 if(err) {
                     console.error("Erro ao cadastrar o cliente: ", err);
                     return res.status(500).json( { error: "Ocorreu um erro ao cadastrar o cliente." } );
@@ -41,6 +42,7 @@ class ClienteController {
                     data: {
                         id: result.insertId,
                         nome,
+                        telefone,
                         email
                     }
                 } );
@@ -56,10 +58,11 @@ class ClienteController {
         const id = req.params.id;
         const p = req.body;
         const nome = p.nome;
+        const telefone = p.telefone;
         const email = p.email;
 
         try {
-            ClienteModel.editCliente(id, nome, email, function(err, result){
+            ClienteModel.editCliente(id, nome, telefone, email, function(err, result){
                 if (err) {
                     console.error("Erro ao editar o cliente: ", err);
                     return res.status(500).json( { error: "Ocorreu um erro ao editar o cliente." } );
@@ -73,7 +76,7 @@ class ClienteController {
                     {
                         mansage: "Cliente editado com sucesso.",
                         data: {
-                            id, nome, email
+                            id, nome, telefone, email
                         }
                     }
                 );               
