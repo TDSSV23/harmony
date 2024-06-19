@@ -26,8 +26,6 @@ class PedidoController {
     static createPedido(req, res) {
         const p = req.body;
         
-
-
         try {
             PedidoModel.createPedido(p, function(err, result){
                 if(err) {
@@ -39,14 +37,7 @@ class PedidoController {
                     mensage: "Pedido adicionado com sucesso.", 
                     data: {
                         id: result.insertId,
-                        id_cliente,
-                        nome,
-                        logradouro,
-                        numero,
-                        bairro,
-                        cidade,
-                        uf,
-                        cep
+                        p
                     }
                 } );
             });

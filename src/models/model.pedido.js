@@ -33,6 +33,7 @@ class PedidoModel {
                         await query(sql, [id_pedido, item.id_produto, item.quantidade, item.total])
                     }
                 }
+                callback(null, result);
                 });
     }
      // Método para editar um pedido existente
