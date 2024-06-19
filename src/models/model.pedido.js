@@ -14,33 +14,32 @@ class PedidoModel {
     });
     }
 
-    static createPedido(dados, callback) {
+    static createPedido(p, callback) {
         let sql = `insert into pedido(id_cliente, nome, end_logradouro, end_numero, end_bairro, end_cidade, end_uf, end_cep)
                 values (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-                con.query(sql, [ dados.id_cliente, dados.item_pedido],
+
+
+                con.query(sql, [p.id_cliente, p.nome, p.end_logradouro, p.end_numero, p.end_bairro, p.end_cidade, p.end_uf, p.end_cep],
                     async function(err, result){
                 if(err)
                     callback(err, null);
-                else{
-                    let id_pedido = result.insertId;
-        
-                        // Itens Pedido
-                        for (let item of dados.itens){
-                            sql = 'insert into item_pedido(id_cliente, nome, end_logradouro, end_numero, end_bairro, end_cidade, end_uf, end_cep) values (?, ?, ?, ?, ?, ?, ?, ?)';
-            
-                            await query(sql, [id_cliente, nome, end_logradouro, end_numero, end_bairro, end_cidade, end_uf, end_cep]);
-                        }
-            
-                        callback(null, result);
+                else {
+                    let id_pedido = result.insertId
+    
+                    for (let item of p.itens) { 
+                        sql = 'insert into item_pedido(id_pedido, id_produto, quantidade, total) values (?, ?, ?, ?)';
+    
+                        await query(sql, [id_pedido, item.id_produto, item.quantidade, item.total])
                     }
+                }
                 });
     }
      // Método para editar um pedido existente
-     static editProduto(dados, callback) {
-        let sql = `update pedido set (id_cliente, nome, end_logradouro, end_numero, end_bairro, end_cidade, end_uf, end_cep)`;
+     static editPedido(id, id_cliente, nome, end_logradouro, end_numero, end_bairro, end_cidade, end_uf, end_cep, callback) {
+        let sql = `update pedido set id_cliente=?, nome=?, end_logradouro=?, end_numero=?, end_bairro=?, end_cidade=?, end_uf=?, end_cep=? where id_pedido=?`;
 
-        con.query(sql, [(dados.id_cliente, dados.nome, dados.end_logradouro, dados.end_numero, dados.end_bairro, dados.end_cidade, dados.end_uf, dados.end_cep)], function(err, result) {
+        con.query(sql, [ id_cliente, nome, end_logradouro, end_numero, end_bairro, end_cidade, end_uf, end_cep, id], function(err, result) {
             if (err) 
                 callback (err, null);
             else
@@ -49,7 +48,7 @@ class PedidoModel {
     }
 
     // Método para remover um pedido
-    static removeProduto(id, callback) {
+    static removePedido(id, callback) {
         let sql = `delete from pedido where id_pedido=?`;
 
         con.query(sql, [id], function(err, result){

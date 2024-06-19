@@ -25,18 +25,11 @@ class PedidoController {
     
     static createPedido(req, res) {
         const p = req.body;
-        const id_cliente = p.id_cliente;
-        const nome = p.nome;
-        const logradouro = p.end_logradouro;
-        const numero = p.end_numero;
-        const bairro = p.end_bairro;
-        const cidade = p.end_cidade;
-        const uf = p.end_uf;
-        const cep = p.end_cep;
+        
 
 
         try {
-            PedidoModel.createPedido(p, id_cliente, nome, end_logradouro, end_numero, end_bairro, end_cidade, end_uf, end_cep, function(err, result){
+            PedidoModel.createPedido(p, function(err, result){
                 if(err) {
                     console.error("Erro ao adicionar o pedido: ", err);
                     return res.status(500).json( { error: "Ocorreu um erro ao adicionar o pedido." } );
@@ -45,7 +38,15 @@ class PedidoController {
                 return res.status(201).json( { 
                     mensage: "Pedido adicionado com sucesso.", 
                     data: {
-                        id: result.insertId
+                        id: result.insertId,
+                        id_cliente,
+                        nome,
+                        logradouro,
+                        numero,
+                        bairro,
+                        cidade,
+                        uf,
+                        cep
                     }
                 } );
             });
@@ -57,8 +58,18 @@ class PedidoController {
     }
 
     static editPedido(req, res) { 
+        const p = req.body;
+        let id = req.params.id;
+        const id_cliente = p.id_cliente;
+        const nome = p.nome;
+        const logradouro = p.end_logradouro;
+        const numero = p.end_numero;
+        const bairro = p.end_bairro;
+        const cidade = p.end_cidade;
+        const uf = p.end_uf;
+        const cep = p.end_cep;
         try {
-                PedidoModel.editPedido(p, function(err, result){
+                PedidoModel.editPedido(id, id_cliente, nome, logradouro, numero, bairro, cidade, uf, cep, function(err, result){
                 if (err) {
                     console.error("Erro ao editar o pedido: ", err);
                     return res.status(500).json( { error: "Ocorreu um erro ao editar o pedido." } );
@@ -72,7 +83,15 @@ class PedidoController {
                         {
                             mansage: "Pedido editado com sucesso.",
                             data: {
-                                id: insertId
+                                id: id,
+                                id_cliente,
+                                nome,
+                                logradouro,
+                                numero,
+                                bairro,
+                                cidade,
+                                uf,
+                                cep
                             }
                     }
             );               

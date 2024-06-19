@@ -5,7 +5,7 @@ const routePedido = Router();
 
 routePedido.get("/pedidos", PedidoController.getAllPedidos);
 routePedido.post("/pedidos", PedidoController.createPedido);
-routePedido.put("/pedidos", PedidoController.editPedido);
-routePedido.delete("/pedidos", PedidoController.removePedido);
+routePedido.put("/pedidos/:id", PedidoController.editPedido);
+routePedido.delete("/pedidos/:id", PedidoController.removePedido);
 
 export default routePedido;
