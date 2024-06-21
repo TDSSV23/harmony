@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 class ClienteModel {
 
-    // Método para obter todos os usuarios
+    // Método para obter todos os clientes
     static getAllClientes(callback) {
         let sql = `select * from cliente`;
     
@@ -14,8 +14,7 @@ class ClienteModel {
                 callback(null, result);
         });
     }
-
-    // Método para criar um novo usuário
+    // Método para criar um novo cliente
     static createCliente(nome, telefone, email, senha, callback) {
         // Criptografar senha
         const hash = bcrypt.hashSync(senha, 10);
@@ -30,8 +29,7 @@ class ClienteModel {
                 callback(null, result);
         });
     }
-
-    // Método para editar um usuário existente
+    // Método para editar um cliente existente
     static editCliente(id, nome, telefone, email, callback) {
         let sql = `update cliente set nome=?, telefone=?, email=? where id_cliente=?`;
 
@@ -42,8 +40,7 @@ class ClienteModel {
                 callback (null, result);
         });
     }
-
-    // Método para remover um usuário
+    // Método para remover um cliente
     static removeCliente(id, callback) {
         let sql = `delete from cliente where id_cliente=?`;
 

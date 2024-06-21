@@ -1,8 +1,7 @@
 import ClienteModel from "../models/model.cliente.js";
 
-
 class ClienteController {
-
+    // Método para ver clientes existentes
     static getAllClientes(req, res) {
         try {
             ClienteModel.getAllClientes(function(err, result){
@@ -22,7 +21,7 @@ class ClienteController {
             res.status(500).json( { error: "Erro interno no servidor." } );
         }
     }
-
+    // Método para criar um cliente
     static createCliente(req, res) {
         const p = req.body;
         const nome = p.nome;
@@ -53,7 +52,7 @@ class ClienteController {
             res.status(500).json( { error: "Erro interno do servidor." } )
         }
     }
-
+    // Método para editar um cliente existente
     static editCliente(req, res) {
         const id = req.params.id;
         const p = req.body;
@@ -86,7 +85,7 @@ class ClienteController {
             res.status(500).json( { error: "Erro interno no servidor." } );
         }
     }
-
+    // Método para remover um cliente
     static removeCliente(req, res) {
         let id = req.params.id;
         

@@ -1,8 +1,7 @@
 import ProdutoModel from "../models/model.produto.js";
 
-
 class ProdutoController {
-    
+    // Método para ver todos os produtos existentes
     static getAllProdutos(req, res) {
         try { 
             ProdutoModel.getAllProdutos(function(err, result){
@@ -21,8 +20,8 @@ class ProdutoController {
             console.error(error);
             res.status(500).json( { Erro: "Erro interno do servidor." } )
         }
-    }
-    
+    }   
+    // Método para criar um produto
     static createProduto(req, res) {
         const p = req.body;
         const nome = p.nome;
@@ -53,7 +52,7 @@ class ProdutoController {
             res.status(500).json( { error: "Erro interno do servidor." } )
         }
     }
-
+    // Método para editar um produto
     static editProduto(req, res) { 
         const p = req.body;
         let id = req.params.id;
@@ -89,7 +88,7 @@ class ProdutoController {
         res.status(500).json( { error: "Erro interno no servidor." } );
         }
     }
-
+    // Método para remover um produto
     static removeProduto(req, res) {
         let id = req.params.id;
         
@@ -112,7 +111,6 @@ class ProdutoController {
         res.status(500).json( { error: "Erro interno no servidor" } );
         }
     }
-
 }
 
 export default ProdutoController;  

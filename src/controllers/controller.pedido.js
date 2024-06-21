@@ -1,8 +1,7 @@
 import PedidoModel from "../models/model.pedido.js";
 
-
 class PedidoController {
-    
+    // Método para ver os pedidos existentes
     static getAllPedidos(req, res) {
         try { 
             PedidoModel.getAllPedidos(function(err, result){
@@ -22,7 +21,7 @@ class PedidoController {
             res.status(500).json( { Erro: "Erro interno do servidor." } )
         }
     }
-    
+    // Método para criar um pedido 
     static createPedido(req, res) {
         const p = req.body;
         
@@ -47,7 +46,7 @@ class PedidoController {
             res.status(500).json( { error: "Erro interno do servidor." } )
         }
     }
-
+    // Método para editar um pedido existente
     static editPedido(req, res) { 
         const p = req.body;
         let id = req.params.id;
@@ -92,7 +91,7 @@ class PedidoController {
         res.status(500).json( { error: "Erro interno no servidor." } );
         }
     }
-
+    // Método para remover um pedido
     static removePedido(req, res) {
         let id = req.params.id;
         

@@ -3,6 +3,7 @@ import PedidoController from "../controllers/controller.pedido.js";
 
 const routePedido = Router();
 
+// Get Post Put e Delete (funções)
 routePedido.get("/pedidos", PedidoController.getAllPedidos);
 routePedido.post("/pedidos", PedidoController.createPedido);
 routePedido.put("/pedidos/:id", PedidoController.editPedido);
